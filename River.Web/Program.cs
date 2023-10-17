@@ -8,14 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
-builder.Services.AddHttpClient<IStoneService, StoneService>();
-builder.Services.AddHttpClient<IAuthService, AuthService>();
+//builder.Services.AddHttpClient<IStoneService, StoneService>();
+//builder.Services.AddHttpClient<IAuthService, AuthService>();
 
 
 // or we can use IOptions to attach a class with the ServiceURLs
 SD.StoneAPIBase = builder.Configuration["ServiceURLs:StoneAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceURLs:AuthAPI"];
 
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IStoneService, StoneService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
